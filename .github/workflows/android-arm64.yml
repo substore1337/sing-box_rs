@@ -63,14 +63,12 @@ jobs:
           CXX: aarch64-linux-android23-clang++
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          set -euo pipefail
-          mkdir -p dist
-          build go build -v -trimpath \
+          GOOS="$BUILD_GOOS" GOARCH="$BUILD_GOARCH" build go build -v -trimpath \
             -o dist/sing-box \
             -tags "${BUILD_TAGS}" \
             -ldflags "-X github.com/sagernet/sing-box/constant.Version=${VERSION} $(cat release/LDFLAGS) -s -w -buildid=" \
             ./cmd/sing-box
-
+          
       - name: Verify executable
         run: |
           set -euo pipefail
