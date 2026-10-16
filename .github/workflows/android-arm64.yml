@@ -75,9 +75,9 @@ jobs:
         run: |
           set -euo pipefail
           file dist/sing-box
+          go version -m dist/sing-box
           ls -lh dist/sing-box
           chmod +x dist/sing-box
-          ./dist/sing-box version
 
       - name: Package artifact
         run: |
